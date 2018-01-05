@@ -2,10 +2,10 @@
 include 'filemenu.php';
 ?>
 <div class="container">
-  <div class="row" style="text-align:center;margin-top:3%">
+  <div class="row" style="text-align:center;margin-top:3%;height:200px;">
     <div class="col-2">
     </div>
-    <div class="col-8">
+    <div class="col-8" style="height:200px;">
 <form method="post">
 
 <?php
@@ -13,13 +13,32 @@ include 'filemenu.php';
   $file=$dir.$_GET["nam"];
 
   //Titulo
-  echo '<input type="text" class="form-control" name="title" value='.basename($file).'>';
+
+  //Comprimir o titulo
+  $filename=basename($file);
+  if(strpos($filename,".txt")!==false){
+    $filemain=str_replace(".txt","",$filename);
+  }else if(strpos($filename,".xlsx")!==false){
+      $filemain=str_replace(".xlsx","",$filename);
+  }else if(strpos($filename,".xls")!==false){
+      $filemain=str_replace(".xls","",$filename);
+  }else if(strpos($filename,".xml")!==false){
+      $filemain=str_replace(".xml","",$filename);
+  }else{
+    echo 'Erro ao carregar o file!';
+  }
+
+
+  echo '<input type="text" class="form-control mb-3" name="title" value='.$filemain.'>';
 
   //Conteudo
-
+  ?>
+<div style="overflow: auto; height:500px;">
+  <?php
   if(strpos($file,'.txt')!==false){
   $read=file($file);
   ?>
+
     <textarea name="conteudo" rows='15' cols='50' class="form-control mt-3">
       <?php
   foreach($read as $name){
@@ -27,6 +46,10 @@ include 'filemenu.php';
     $name=str_replace($br,"\n",$name);
     echo $name;
   }
+  ?>
+</textarea>
+
+  <?php
   }else if(strpos($file,'.xlsx')!==false || strpos($file,'.xls')!==false){
     //Ler ficheiro Excel
 
@@ -64,8 +87,7 @@ include 'filemenu.php';
   }
 
 ?>
-
-</textarea>
+</div>
 <input type="submit" name="editar" value="Editar File" class="btn btn-primary w-100 mt-3">
 </form>
 
@@ -127,7 +149,20 @@ if(isset($_POST["editar"])){
           echo '<script>errorMessage()</script>';
     }else{
       $finaltitle=$dir.$newtitle;
-    rename($file,$finaltitle);
+      //Adicionar extensao denovo ao file
+      if(strpos($filename,".txt")!==false){
+          rename($file,$finaltitle.".txt");
+      }else if(strpos($filename,".xlsx")!==false){
+          rename($file,$finaltitle.".xlsx");
+      }else if(strpos($filename,".xls")!==false){
+          rename($file,$finaltitle.".xls");
+      }else if(strpos($filename,".xml")!==false){
+            rename($file,$finaltitle.".xml");
+      }else{
+        echo 'Erro ao carregar o file!';
+      }
+
+
 
       //header('Location:saveeditfile.php?nam='.$newtitle);
       if($error!==1){

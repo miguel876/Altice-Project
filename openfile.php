@@ -72,7 +72,7 @@ if(isset($_POST["open"])){
     $lastRow=$sheet->getHighestRow();
     //Obter a ultima Coluna do ficheiro Excel
     $lastCol=$sheet->getHighestColumn();
-
+echo '<div style="overflow: auto; height:500px">';
     echo "<table class='table table-bordered' style='text-align:center;'>";
     echo "<tr><td></td>";
     for($cc='A';$cc<=$lastCol;$cc++){
@@ -88,7 +88,7 @@ if(isset($_POST["open"])){
       }
       echo "<tr>";
     }
-    echo "</table>";
+    echo "</table></div>";
 
   }else if(strpos($file,'.xls')!==false){
     //Ler ficheiro Excel

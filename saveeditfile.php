@@ -9,10 +9,11 @@ include 'filemenu.php';
 <form method="post">
 
 <?php
-  $file=$_GET["nam"];
+  $dir="Files/";
+  $file=$dir.$_GET["nam"];
 
   //Titulo
-  echo '<input type="text" class="form-control" name="title" value='.$file.'>';
+  echo '<input type="text" class="form-control" name="title" value='.basename($file).'>';
 
   //Conteudo
 
@@ -36,10 +37,10 @@ include 'filemenu.php';
     $excelReader=PHPExcel_IOFactory::createReaderForFile($filename);
     //Criar uma variavel que vai conter o ficheiro, o objeto do ficheiro Excel
     $excelObj=$excelReader->load($filename);
-    //Obter o Excel
+    //Obter a folha Excel
     $sheet=$excelObj->getActiveSheet();
     //Obter a ultima Row do ficheiro Excel
-    $lastRow=$sheet->getHighestRow();
+    $lastRow=100;
     //Obter a ultima Coluna do ficheiro Excel
     $lastCol=$sheet->getHighestColumn();
 
@@ -107,6 +108,7 @@ if(isset($_POST["editar"])){
     $main=fopen($file,'w');
     $br="\n";
     $cont=str_replace($br,"<br>",$conteudo);
+    trim($cont," e");
     fwrite($main,$cont);
     fclose($main);
   }
@@ -124,7 +126,8 @@ if(isset($_POST["editar"])){
   if(strpos($newtitle,'<')!==false || strpos($newtitle,'>')!==false || strpos($newtitle,';')!==false){
           echo '<script>errorMessage()</script>';
     }else{
-    rename($file,$newtitle);
+      $finaltitle=$dir.$newtitle;
+    rename($file,$finaltitle);
 
       //header('Location:saveeditfile.php?nam='.$newtitle);
       if($error!==1){
@@ -135,6 +138,8 @@ if(isset($_POST["editar"])){
     }
 }
 ?>
+</div>
+<div class="col-2">
 </div>
 </div>
 </div>

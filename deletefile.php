@@ -17,39 +17,39 @@ function deleteFile(){
 </script>
 
 <?php
-//lista de files
-$dir="../phpfiles/";
-//raiz
-$files=glob($dir."*.txt");
-//nome do file
-$filestxt=glob("*.txt");
-$filexlsx=glob("*.xlsx");
-$filexls=glob("*.xls");
-$filexml=glob("*.xml");
-$filejpg=glob("*.jpg");
-$filepng=glob("*.png");
+//Lista de files
+$dirfile="Files/";
+$dirimg="Images/";
+
+//Nome e Formato do Ficheiro
+$filestxt=glob($dirfile."*.txt");
+$filexlsx=glob($dirfile."*.xlsx");
+$filexls=glob($dirfile."*.xls");
+$filexml=glob($dirfile."*.xml");
+$filejpg=glob($dirimg."*.jpg");
+$filepng=glob($dirimg."*.png");
 
 ?>
 <form method="post">
 <select name="files" id="framework" class="form-control">
 <?php
 foreach($filestxt as $allfiles){
-  echo "<option value=".$allfiles.">".$allfiles."</option>";
+  echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 foreach($filexlsx as $allfiles){
-    echo "<option value=".$allfiles.">".$allfiles."</option>";
+    echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 foreach($filexls as $allfiles){
-    echo "<option value=".$allfiles.">".$allfiles."</option>";
+    echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 foreach($filexml as $allfiles){
-    echo "<option value=".$allfiles.">".$allfiles."</option>";
+    echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 foreach($filejpg as $allfiles){
-    echo "<option value=".$allfiles.">".$allfiles."</option>";
+    echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 foreach($filepng as $allfiles){
-    echo "<option value=".$allfiles.">".$allfiles."</option>";
+    echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 echo '</select><input type="submit" name="apagar" value="Apagar File" class="btn btn-primary w-100 mt-3"></form>';
 

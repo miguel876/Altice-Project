@@ -13,11 +13,11 @@
 </form>
 <script>
 function successCreate(){
-  alert('File criado com sucesso!');
+  alert('Ficheiro criado com Sucesso!');
 }
 
 function errorCreate(){
-  alert('Nome do ficheiro já existe!');
+  alert('Nome do ficheiro já Existe!');
 }
 
 function errorCreate2(){

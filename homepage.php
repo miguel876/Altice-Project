@@ -38,8 +38,8 @@ $filepng=glob("*.png");
           <div class='card-body'>
             <h5 class='card-title'>".$allfiles."</h5>
             <form method='post'>
-            <input type='submit' class='btn btn-primary w-100' name='open' value='Open File'>
           
+
             </form>
           </div>
         </div>

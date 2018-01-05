@@ -2,17 +2,17 @@
 <?php
 include 'filemenu.php';
 
-//lista de files
-$dir="Files/";
-//raiz
-$files=glob($dir."*.txt");
+//Lista de files
+$dirfile="Files/";
+$dirimg="Images/";
+
 //Nome e Formato do Ficheiro
-$filestxt=glob($dir,"*.txt");
-$filexlsx=glob("*.xlsx");
-$filexls=glob("*.xls");
-$filexml=glob("*.xml");
-$filejpg=glob("*.jpg");
-$filepng=glob("*.png");
+$filestxt=glob($dirfile."*.txt");
+$filexlsx=glob($dirfile."*.xlsx");
+$filexls=glob($dirfile."*.xls");
+$filexml=glob($dirfile."*.xml");
+$filejpg=glob($dirimg."*.jpg");
+$filepng=glob($dirimg."*.png");
 
 ?>
 <div class="container">
@@ -26,24 +26,23 @@ $filepng=glob("*.png");
 <?php
 //Mostar todos os files dentro da pasta
 foreach($filestxt as $allfiles){
-  str_replace("Files/"," ",$allfiles);
-  echo "<option value=".$allfiles.">".$allfiles."</option>";
-
+  str_replace($dir," ",$allfiles);
+  echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 foreach($filexlsx as $allfiles){
-    echo "<option value=".$allfiles.">".$allfiles."</option>";
+    echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 foreach($filexls as $allfiles){
-    echo "<option value=".$allfiles.">".$allfiles."</option>";
+    echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 foreach($filexml as $allfiles){
-    echo "<option value=".$allfiles.">".$allfiles."</option>";
+    echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 foreach($filejpg as $allfiles){
-    echo "<option value=".$allfiles.">".$allfiles."</option>";
+    echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 foreach($filepng as $allfiles){
-    echo "<option value=".$allfiles.">".$allfiles."</option>";
+    echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 echo '</select></td><td><input type="submit" name="open" value="Abrir File" class="btn btn-primary w-100 mt-3"></form></td></tr>';
 

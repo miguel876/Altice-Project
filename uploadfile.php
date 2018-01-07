@@ -14,10 +14,10 @@ if(isset($_POST['upload'])){
   $file=$_FILES['file'];
 
   $file_name=$file['name'];
-  $file_tmp=$file['tmp_name'];
+  $file_tmp="Files/".$file['tmp_name'];
   $file_size=$file['size'];
   $file_error=$file['error'];
-  $file_location="../phpfiles/".$file_name;
+  $file_location="../phpfiles/Altice-Project/Files/".$file_name;
 
   if(empty($file_name)){
     echo 'Insira algum ficheiro para inserir!';

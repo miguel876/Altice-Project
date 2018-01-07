@@ -29,14 +29,18 @@ function errorCreate2(){
 if(isset($_POST["createfile"])){
     $filename=$_POST["filetit"];
     $checkname=0;
-  //nome do file
-  $filestxt=glob("*.txt");
-  $filexlsx=glob("*.xlsx");
-  $filexls=glob("*.xls");
-  $filexml=glob("*.xml");
+    //Lista de files
+    $dirfile="Files/";
+
+    //Nome e Formato do Ficheiro
+    $filestxt=glob($dirfile."*.txt");
+    $filexlsx=glob($dirfile."*.xlsx");
+    $filexls=glob($dirfile."*.xls");
+    $filexml=glob($dirfile."*.xml");
+
   $checkname=0;
   foreach($filestxt as $allfiles){
-  if($filename.".txt"===$allfiles){
+  if($filename.".txt"===basename($allfiles)){
     $checkname=1;
 
   }
@@ -48,7 +52,7 @@ if(isset($_POST["createfile"])){
     //Verificar se já existe um ficheiro com o mesmo Nome
     echo '<script>errorCreate()</script>';
   }else{
-    fopen($filename.'.txt','w');
+    fopen('Files/'.$filename.'.txt','w');
     echo '<script>successCreate()</script>';
   }
 }

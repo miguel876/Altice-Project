@@ -1,7 +1,4 @@
-
 <?php
-include 'filemenu.php';
-
 //Lista de files
 $dirfile="Files/";
 
@@ -11,18 +8,10 @@ $filexlsx=glob($dirfile."*.xlsx");
 $filexls=glob($dirfile."*.xls");
 $filexml=glob($dirfile."*.xml");
 
-?>
-<div class="container">
-  <div class="row" style="text-align:center;margin-top:3%">
-    <div class="col-2">
-    </div>
-    <div class="col-8">
-<form method="post">
+function selectFiles($filestxt, $filexlsx, $filexls, $filexml){
 
-<select name="files" id="framework" class="form-control">
-<?php
 foreach($filestxt as $allfiles){
-  echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
+  echo '<option value='.$allfiles.'>'.basename($allfiles).'</option>';
 }
 foreach($filexlsx as $allfiles){
   echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
@@ -33,14 +22,27 @@ foreach($filexls as $allfiles){
 foreach($filexml as $allfiles){
   echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
-echo '</select></td><td><input type="submit" name="open" value="Abrir File" class="btn btn-primary w-100 mt-3"></form></td></tr>';
+
+}
+?>
+
+  <div class="row" style="text-align:center;margin-top:3%">
+    <div class="col-2">
+    </div>
+    <div class="col-8">
+
+
+<?php
+echo '<form method="post"><select name="files" class="form-control">';
+selectFiles($filestxt, $filexlsx, $filexls, $filexml);
+echo '</select><input type="submit" name="open" value="Abrir File" class="btn btn-primary w-100 mt-3"></form>';
 
 if(isset($_POST["open"])){
+
   $nam=$_POST["files"];
-  header('Location:saveeditfile.php?nam='.basename($nam));
+  header('Location:index.php?page=6&nam='.basename($nam));
 }
 
  ?>
-</div>
 </div>
 </div>

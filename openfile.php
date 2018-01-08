@@ -1,32 +1,7 @@
-
 <?php
-include 'filemenu.php';
-
-//Lista de files
-$dirfile="Files/";
-$dirimg="Images/";
-
-//Nome e Formato do Ficheiro
-$filestxt=glob($dirfile."*.txt");
-$filexlsx=glob($dirfile."*.xlsx");
-$filexls=glob($dirfile."*.xls");
-$filexml=glob($dirfile."*.xml");
-$filejpg=glob($dirimg."*.jpg");
-$filepng=glob($dirimg."*.png");
-
-?>
-<div class="container">
-  <div class="row" style="text-align:center;margin-top:3%">
-    <div class="col-2">
-    </div>
-    <div class="col-8">
-<form method="post">
-<select name="files" id="framework" class="form-control">
-
-<?php
+function selectedFiles($filestxt, $filexlsx, $filexml, $filejpg, $filepng){
 //Mostar todos os files dentro da pasta
 foreach($filestxt as $allfiles){
-  str_replace($dir," ",$allfiles);
   echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
 foreach($filexlsx as $allfiles){
@@ -44,51 +19,84 @@ foreach($filejpg as $allfiles){
 foreach($filepng as $allfiles){
     echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
 }
+}
+
+function readExcel($filename){
+  include 'Classes/PHPExcel/IOFactory.php';
+  //Criar uma variavel para ler o ficheiro Excel
+  $excelReader=PHPExcel_IOFactory::createReaderForFile($filename);
+  //Criar uma variavel que vai conter o ficheiro, o objeto do ficheiro Excel
+  $excelObj=$excelReader->load($filename);
+  //Obter o Excel
+  $sheet=$excelObj->getActiveSheet();
+  //Obter a ultima Row do ficheiro Excel
+  $lastRow=$sheet->getHighestRow();
+  //Obter a ultima Coluna do ficheiro Excel
+  $lastCol=$sheet->getHighestColumn();
+  echo '<div style="overflow: auto; height:500px">';
+  echo "<table class='table table-bordered' style='text-align:center;'>";
+  echo "<tr><td></td>";
+  for($cc='A';$cc<=$lastCol;$cc++){
+    echo "<td>".$cc."</td>";
+  }
+  echo "</tr>";
+  for($r=1;$r<=$lastRow;$r++){
+    echo "<tr><td>".$r."</td>";
+    for($c='A'; $c<=$lastCol;$c++){
+
+      echo "<td>".$sheet->getCell($c.$r)->getValue()."</td>";
+
+    }
+    echo "<tr>";
+  }
+  echo "</table></div>";
+}
+
+function readText($read){
+  foreach($read as $name){
+  echo $name."<br>";
+}
+}
+
+//Lista de files
+$dirfile="Files/";
+$dirimg="Images/";
+
+//Nome e Formato do Ficheiro
+$filestxt=glob($dirfile."*.txt");
+$filexlsx=glob($dirfile."*.xlsx");
+$filexls=glob($dirfile."*.xls");
+$filexml=glob($dirfile."*.xml");
+$filejpg=glob($dirimg."*.jpg");
+$filepng=glob($dirimg."*.png");
+
+?>
+  <div class="row" style="margin-top:3%">
+    <div class="col-2">
+    </div>
+    <div class="col-8">
+<form method="post">
+<select name="files" id="framework" class="form-control">
+
+<?php
+
+selectedFiles($filestxt, $filexlsx, $filexml, $filejpg, $filepng);
 echo '</select></td><td><input type="submit" name="open" value="Abrir File" class="btn btn-primary w-100 mt-3"></form></td></tr>';
 
 
 if(isset($_POST["open"])){
+
   $file=$_POST["files"];
 
   if(strpos($file,'.txt')!==false){
     //Ler ficheiro Text
-      $read=file($file);
-      foreach($read as $name){
-      echo $name."<br>";
-    }
+    $read=file($file);
+    readText($read);
+
   }else if(strpos($file,'.xlsx')!==false){
     //Ler ficheiro Excel
-
-    include 'Classes/PHPExcel/IOFactory.php';
-
     $filename=$file;
-    //Criar uma variavel para ler o ficheiro Excel
-    $excelReader=PHPExcel_IOFactory::createReaderForFile($filename);
-    //Criar uma variavel que vai conter o ficheiro, o objeto do ficheiro Excel
-    $excelObj=$excelReader->load($filename);
-    //Obter o Excel
-    $sheet=$excelObj->getActiveSheet();
-    //Obter a ultima Row do ficheiro Excel
-    $lastRow=$sheet->getHighestRow();
-    //Obter a ultima Coluna do ficheiro Excel
-    $lastCol=$sheet->getHighestColumn();
-echo '<div style="overflow: auto; height:500px">';
-    echo "<table class='table table-bordered' style='text-align:center;'>";
-    echo "<tr><td></td>";
-    for($cc='A';$cc<=$lastCol;$cc++){
-      echo "<td>".$cc."</td>";
-    }
-    echo "</tr>";
-    for($r=1;$r<=$lastRow;$r++){
-      echo "<tr><td>".$r."</td>";
-      for($c='A'; $c<=$lastCol;$c++){
-
-        echo "<td>".$sheet->getCell($c.$r)->getValue()."</td>";
-
-      }
-      echo "<tr>";
-    }
-    echo "</table></div>";
+    readExcel($filename);
 
   }else if(strpos($file,'.xls')!==false){
     //Ler ficheiro Excel
@@ -119,4 +127,3 @@ echo '<div style="overflow: auto; height:500px">';
  ?>
 </div>
 </div>
- </div>

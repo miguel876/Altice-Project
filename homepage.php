@@ -1,4 +1,4 @@
-<?php include 'filemenu.php';
+<?php
 //lista de files
 $dir="../phpfiles/";
 //raiz
@@ -12,7 +12,6 @@ $filejpg=glob("*.jpg");
 $filepng=glob("*.png");
 
 ?>
-<div class="container">
   <div class="row" style="text-align:center;margin-top:3%">
 
     <div class="col">
@@ -38,7 +37,7 @@ $filepng=glob("*.png");
           <div class='card-body'>
             <h5 class='card-title'>".$allfiles."</h5>
             <form method='post'>
-          
+
 
             </form>
           </div>
@@ -60,6 +59,5 @@ if(isset($_POST["searchbtn"])){
 
 }
  ?>
-</div>
 </div>
 </div>

@@ -1,6 +1,8 @@
-<?php include 'filemenu.php'; ?>
-<div class="container">
-  <div class="row" style="text-align:center;margin-top:3%">
+<?php
+
+ ?>
+
+<div class="row" style="text-align:center;margin-top:3%">
     <div class="col-3">
     </div>
     <div class="col-6">
@@ -12,15 +14,48 @@
 <?php
 if(isset($_POST['upload'])){
   $file=$_FILES['file'];
-
   $file_name=$file['name'];
-  $file_tmp="Files/".$file['tmp_name'];
+  $file_tmp=$file['tmp_name'];
   $file_size=$file['size'];
   $file_error=$file['error'];
-  $file_location="../phpfiles/Altice-Project/Files/".$file_name;
+  $file_location="C:/xampp/htdocs/phpfiles/Altice-Project/Files";
+
+  //Lista de files
+  $dirfile="Files/";
+
+  //Nome e Formato do Ficheiro
+  $filestxt=glob($dirfile."*.txt");
+  $filexlsx=glob($dirfile."*.xlsx");
+  $filexls=glob($dirfile."*.xls");
+  $filexml=glob($dirfile."*.xml");
+
+$checkname=0;
+foreach($filestxt as $allfiles){
+if($file_name===basename($allfiles)){
+  $checkname=1;
+}
+}
+foreach($filexlsx as $allfiles){
+if($file_name===basename($allfiles)){
+  $checkname=1;
+}
+}
+foreach($filexls as $allfiles){
+if($file_name===basename($allfiles)){
+  $checkname=1;
+}
+}
+foreach($filexml as $allfiles){
+if($file_name===basename($allfiles)){
+  $checkname=1;
+}
+}
 
   if(empty($file_name)){
     echo 'Insira algum ficheiro para inserir!';
+  }
+    else if($checkname===1){
+      echo "O ficheiro já existe!";
 
   }else{
 
@@ -33,10 +68,13 @@ if(isset($_POST['upload'])){
 
   if(in_array($file_ext,$allowed)){
       if($file_error===1){
-        echo 'Formato não suportado';
+        echo 'Erro ao fazer upload do ficheiro';
         }else{
-                if(move_uploaded_file($file_tmp,$file_location)){
-                  echo 'File inserido com sucesso!';
+                $file_name=str_replace(" ","",$file_name);
+                if(move_uploaded_file($file_tmp,"$file_location/$file_name")){
+
+                  $success="File inserido com sucesso!";
+                  echo $file_name;
               }
             }
           }else{
@@ -45,6 +83,5 @@ if(isset($_POST['upload'])){
 }
 }
  ?>
-</div>
 </div>
 </div>

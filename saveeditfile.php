@@ -32,21 +32,7 @@ function readExcel($filename){
   }
   echo "</table>";
 }
-$filemain="";
-function removeExt($filename){
-  if(strpos($filename,".txt")!==false){
-    $filemain=str_replace(".txt","",$filename);
-  }else if(strpos($filename,".xlsx")!==false){
-      $filemain=str_replace(".xlsx","",$filename);
-  }else if(strpos($filename,".xls")!==false){
-      $filemain=str_replace(".xls","",$filename);
-  }else if(strpos($filename,".xml")!==false){
-      $filemain=str_replace(".xml","",$filename);
-  }else{
-    echo 'Erro ao carregar o file!';
-  }
 
-}
 
  ?>
 
@@ -63,11 +49,24 @@ function removeExt($filename){
   $file=$dir.$_GET["nam"];
 
   //Titulo
-
   //Comprimir o titulo
   $filename=basename($file);
-  removeExt($filename);
-  echo '<input type="text" class="form-control mb-3" name="title" value='.$filemain.'>';
+
+    if(strpos($filename,".txt")!==false){
+      $filemain=str_replace(".txt","",$filename);
+    }else if(strpos($filename,".xlsx")!==false){
+        $filemain=str_replace(".xlsx","",$filename);
+    }else if(strpos($filename,".xls")!==false){
+        $filemain=str_replace(".xls","",$filename);
+    }else if(strpos($filename,".xml")!==false){
+        $filemain=str_replace(".xml","",$filename);
+    }else{
+      echo 'Erro ao carregar o file!';
+    }
+
+
+  echo '<input type="text" class="form-control mb-3" name="title" value='.@$filemain.'>';
+
   //Conteudo
   ?>
 <div style="overflow: auto; height:500px;">
@@ -94,95 +93,85 @@ function removeExt($filename){
 
 ?>
 </div>
-<input type="button" name="editar" value="Editar File" onclick="titulo()" class="btn btn-primary w-100 mt-3">
+<input type="submit" name="editar" value="Editar File" class="btn btn-primary w-100 mt-3">
 </form>
 
-<script>
-//Popup de erro
-  function errorMessage(){
-    alert('Caractéres não suportados!(< , > , ;)');
-
-  }
-</script>
-<script>
-//Popup de sucesso
-function successMessage(){
-
-
-}
-</script>
-<script>
-//Popup de sucesso
-function messageForm(var e){
-  if(e==0){
-  alert('Formato de ficheiro não suportado!');
-}else{
-  alert('rkrksmkmg');
-}
-}
-</script>
   <?php
 
 if(isset($_POST["editar"])){
 
     if(strpos($file,'.txt')!==false){
+
     //Conteudo Txt
     $conteudo=$_POST["conteudo"];
+      //Titulo
+    $newtitle=$_POST["title"];
 
     //Verificar o Conteudo por caracteres invalidos
     if(strpos($conteudo,'<')!==false || strpos($conteudo,'>')!==false || strpos($conteudo,';')!==false){
-
-        echo '<script>errorMessage()</script>';
-
-
+      echo '<script>
+      var text="O conteúdo contem caractéres inválidos!";
+      setAlert(text,1);
+      </script>';
+      $continuar=1;
     }else{
 
     $main=fopen($file,'w');
     $br="\n";
     $cont=str_replace($br,"<br>",$conteudo);
-    trim($cont," e");
+    trim($cont," ");
     fwrite($main,$cont);
     fclose($main);
   }
+    if(@$continuar!==1){
+  if(strpos($newtitle,'<')!==false || strpos($newtitle,'>')!==false || strpos($newtitle,';')!==false || strpos($newtitle," ")!==false){
+    echo '<script>
+    var text="O título contém caracteres inválidos(< > ; SPACE)!";
+    setAlert(text,1);
+    </script>';
+  }else{
+    $finaltitle=$dir.$newtitle;
+
+    //Adicionar extensao de novo ao file
+    if(strpos($filename,".txt")!==false){
+        rename($file,$finaltitle.".txt");
+        echo '<input type="hidden" value="0" id="edit">
+              <script>
+                var text="Ficheiro editado com sucesso!";
+              setAlertEditWindow(text);
+              </script>';
+        header('Location:index.php?page=6&nam='.$newtitle.'.txt');
+
+    }else{
+      echo '<input type="hidden" value="0" id="edit">
+            <script>
+              var text="Erro ao carregar o ficheiro!";
+            setAlertEditWindow(text);
+            </script>';
+
+      header('Location:index.php?page=6&nam='.$newtitle.'.txt');
+
+    }
+  }
+  }
+
 }else if(strpos($file,'.xlsx')!==false || strpos($file,'xls')!==false){
     //Conteudo Excel
 
-}
-  //Titulo
-  function titulo(){
-
-    $newtitle=$_POST["title"];
-    //Verificar se o ficheiro tem extensao
-    if(strpos($newtitle,'.txt')!==true || strpos($newtitle,'.xlsx')!==true || strpos($newtitle,'.xls')!==true){
-
-        echo '<script>messageForm(0)</script>';
-    }
-
-  if(strpos($newtitle,'<')!==false || strpos($newtitle,'>')!==false || strpos($newtitle,';')!==false){
-          echo '<script>messageForm(0)</script>';
-          echo 'Resultou amigos!';
-    }else{
-      $finaltitle=$dir.$newtitle;
-      //Adicionar extensao denovo ao file
-      if(strpos($filename,".txt")!==false){
-          rename($file,$finaltitle.".txt");
-      }else if(strpos($filename,".xlsx")!==false){
-          rename($file,$finaltitle.".xlsx");
-      }else if(strpos($filename,".xls")!==false){
-          rename($file,$finaltitle.".xls");
-      }else if(strpos($filename,".xml")!==false){
-            rename($file,$finaltitle.".xml");
-      }else{
-        echo 'Erro ao carregar o file!';
-      }
-}
-
-
-      //header('Location:saveeditfile.php?nam='.$newtitle);
-
+  }else if(strpos($file,'.xml')!==false){
+      //Conteudo XML
 
     }
+  else{
+    echo '<script>
+    var text="O formato do ficheiro não é suportado (txt, xlsx, xls, xml)!";
+    setAlert(text,1);
+    </script>';
+  }
+
+
 }
+
 ?>
 </div>
 <div class="col-2">

@@ -4,17 +4,29 @@
   <head><title>Altice</title>
 
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-      <link rel="stylesheet2" type="text/css" href="style.css">
-      <script src="JavaScript/alert.js"></script>
+      <link rel="stylesheet" type="text/css" href="style.css">
+      <script type="text/javascript" src="JavaScript/alert.js"></script>
   </head>
 
 <body>
   <div class="container">
     <div class="row">
-      <div class="col">
+      <div class="col-3">
     <header>
       <a href="filemenu.php"><img src="Images/altice.png" widht="70px" height="70px" style="margin-top:5px;"></a>
     </header>
+  </div>
+  <div class="col-4">
+  </div>
+  <div class="col-5">
+    <div class="hidden" id="alert">
+      <div class="alert alert-warning alert-dismissible fade show" id="alertDiv" style="margin-top:1%;height:50px;background-color:#FF5450;color:white;" role="alert">
+    <p id="alertText">sdfsdfsdfdss</p>
+    <button type="button" class="close" data-dismiss="alert" style="padding-bottom:1%;" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+    </div>
   </div>
 </div>
 <?php

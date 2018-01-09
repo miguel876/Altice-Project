@@ -19,7 +19,7 @@ if(isset($_POST['upload'])){
   $file_size=$file['size'];
   $file_error=$file['error'];
   $file_location="C:/xampp/htdocs/phpfiles/Altice-Project/Files";
-
+  
   //Lista de files
   $dirfile="Files/";
 
@@ -28,11 +28,13 @@ if(isset($_POST['upload'])){
   $filexlsx=glob($dirfile."*.xlsx");
   $filexls=glob($dirfile."*.xls");
   $filexml=glob($dirfile."*.xml");
+  $file_name=str_replace(" ","",$file_name);
 
 $checkname=0;
 foreach($filestxt as $allfiles){
-if($file_name===basename($allfiles)){
+if($file_name==basename($allfiles)){
   $checkname=1;
+
 }
 }
 foreach($filexlsx as $allfiles){
@@ -52,10 +54,18 @@ if($file_name===basename($allfiles)){
 }
 
   if(empty($file_name)){
-    echo 'Insira algum ficheiro para inserir!';
+    echo '<script>
+    var text="Insira algum ficheiro para inserir!";
+    var type= 0;
+    setAlert(text,1);
+    </script>';
   }
     else if($checkname===1){
-      echo "O ficheiro já existe!";
+      echo '<script>
+      var text="O ficheiro já existe!";
+      var type= 0;
+      setAlert(text,1);
+      </script>';
 
   }else{
 
@@ -68,17 +78,28 @@ if($file_name===basename($allfiles)){
 
   if(in_array($file_ext,$allowed)){
       if($file_error===1){
-        echo 'Erro ao fazer upload do ficheiro';
+        echo '<script>
+        var text="Erro ao fazer upload do ficheiro";
+        var type= 0;
+        setAlert(text,1);
+        </script>';
         }else{
-                $file_name=str_replace(" ","",$file_name);
+
                 if(move_uploaded_file($file_tmp,"$file_location/$file_name")){
 
-                  $success="File inserido com sucesso!";
-                  echo $file_name;
+                  echo '<script>
+                  var text="File inserido com sucesso!";
+                  var type= 0;
+                  setAlert(text,0);
+                  </script>';
               }
             }
           }else{
-    echo 'Formato do ficheiro não suportado!';
+    echo '<script>
+    var text="Formato do ficheiro não suportado!";
+    var type= 0;
+    setAlert(text,1);
+    </script>';
   }
 }
 }

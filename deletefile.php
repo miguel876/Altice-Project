@@ -3,6 +3,8 @@
 $dirfile="Files/";
 $dirimg="Images/";
 
+$file="";
+
 //Nome e Formato do Ficheiro
 $filestxt=glob($dirfile."*.txt");
 $filexlsx=glob($dirfile."*.xlsx");
@@ -13,11 +15,11 @@ $filepng=glob($dirimg."*.png");
 
   //Delete File
 function deleteFile($filename){
+  $file=$filename;
+  unlink($file);
 
-    $file=$filename;
-    unlink($file);
+  header('Location:index.php?page=2');
 
-    header('Location:index.php?page=2');
 }
 
 function selectFiles($filestxt, $filexlsx, $filexls, $filexml){
@@ -47,17 +49,44 @@ foreach($filepng as $allfiles){
     <div class="col-2">
     </div>
     <div class="col-8">
-
+      <div id="hidden1" style="display:block;">
 
 <?php
 $file=@$_POST["files"];
 selectFiles($filestxt, $filexlsx, $filexls, $filexml);
-echo '</select><form method="post"><input type="submit" name="apagar" value="Apagar File" class="btn btn-primary w-100 mt-3></form>';
+echo '</select><form method="post"><input type="submit" name="apagar" value="Apagar File" class="btn btn-primary w-100 mt-3">';
 
-if(isset($_POST["apagar"])){
-  deleteFile($file);
-}
  ?>
 
+</div>
+
+<div id="hidden2" style="display:none;">
+  <div class="card bg-light mb-3">
+<div class="card-header">Apagar Ficheiro</div>
+<div class="card-body">
+  <h5 class="card-title">Apagar o ficheiro <?php echo basename($file) ?>?</h5>
+
+  <input type="submit" name="delete" value="Apagar" class="btn btn-primary">
+  <input type="submit" name="cancelar" value="Cancelar" class="btn btn-secondary">
+</form>
+</div>
+</div>
+</div>
+
+<?php
+$is=isset($_POST["apagar"]);
+if($is){
+  echo '<script>
+      setDeleteWindow()
+  </script>';
+  unset($is);
+}
+
+if(isset($_POST["delete"])){
+deleteFile($file);
+
+}
+
+ ?>
 </div>
 </div>

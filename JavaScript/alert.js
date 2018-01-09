@@ -27,7 +27,9 @@ function setAlert(text, type){
 }
 function setDeleteWindow(){
   var hidden2= document.getElementById("hidden2");
-  hidden2.style.display("block");
+  var hidden1= document.getElementById("hidden1");
+  hidden1.style.display="none";
+  hidden2.style.display="block";
 
 }
 function setAlertEditWindow(text){

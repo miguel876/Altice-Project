@@ -16,7 +16,8 @@ function deleteFile($filename){
 
     $file=$filename;
     unlink($file);
-    header('Refresh:0');
+
+    header('Location:index.php?page=2');
 }
 
 function selectFiles($filestxt, $filexlsx, $filexls, $filexml){
@@ -42,35 +43,21 @@ foreach($filepng as $allfiles){
 }
 ?>
 
-<script>
-function deleteFile(){
-  var confirmar=0;
-  var conf=confirm('Apagar o file?');
-  if(conf==1){
-    confirmar=1;
-    window.location.href="filemenu.php?conf="+confirmar;
-  }
-
-}
-</script>
-
-
   <div class="row" style="text-align:center;margin-top:3%">
     <div class="col-2">
     </div>
     <div class="col-8">
 
-<?php
 
+<?php
+$file=@$_POST["files"];
 selectFiles($filestxt, $filexlsx, $filexls, $filexml);
-echo '<form method="post"></select><input type="submit" name="apagar" value="Apagar File" class="btn btn-primary w-100 mt-3"></form>';
+echo '</select><form method="post"><input type="submit" name="apagar" value="Apagar File" class="btn btn-primary w-100 mt-3></form>';
 
 if(isset($_POST["apagar"])){
-$file=$_POST["files"];
-deleteFile($file);
-
+  deleteFile($file);
 }
  ?>
-</table>
+
 </div>
 </div>

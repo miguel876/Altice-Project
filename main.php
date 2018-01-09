@@ -30,6 +30,10 @@ switch($id){
       include 'saveeditfile.php';
       break;
 
+      case '50':
+        include 'testes.php';
+        break;
+
    default:
       include 'openfile.php';
    break;

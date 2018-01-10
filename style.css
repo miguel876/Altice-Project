@@ -7,3 +7,30 @@ body{
 .hidden{
   display:none;
 }
+.btn{
+  background-image:url("SystemImages/buttonbgnormal.png");
+  background-size:cover;
+  border:none;
+}
+
+.btn-group a{
+    color: white;
+    padding: 30px 3px 30px 3px;
+    background-image:url("SystemImages/buttonbg.png");
+    font-size: 22px;
+    cursor: pointer;
+    text-align: right;
+    margin:3px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.30);
+    border-radius: 3px;
+    padding-top:
+
+}
+
+.btn-group a:hover {
+    text-decoration: none;
+    transition: all 0.5s;
+    font-size: 25px;
+padding: 24px 30px 30px 3px;
+
+}

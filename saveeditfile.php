@@ -33,7 +33,28 @@ function readExcel($filename){
   echo "</table>";
 }
 
+//Alerts
+$alerthash=@$_GET["edit"];
 
+$edit="Success";
+
+include 'Classes/Encryption.php';
+$encrypt= new Encryption;
+$confirmencrypt=$encrypt->decryptURL($edit,$alerthash);
+if(!empty($alerthash)){
+if($confirmencrypt===0){
+  echo '<script>
+    var text="File editado com sucesso!";
+    setAlert(text,0);
+    </script>';
+
+}else if($confirmencrypt===1){
+  echo '<script>
+  var text="Erro ao editar o ficheiro!";
+  setAlert(text,1);
+  </script>';
+}
+}
  ?>
 
 <div class="row" style="text-align:center;margin-top:3%;height:200px;">
@@ -69,13 +90,13 @@ function readExcel($filename){
 
   //Conteudo
   ?>
-<div style="overflow: auto; height:500px;">
+<div style="overflow: auto; height:400px;">
   <?php
   if(strpos($file,'.txt')!==false){
   $read=file($file);
   ?>
 
-    <textarea name="conteudo" rows='15' cols='50' class="form-control mt-3">
+    <textarea name="conteudo" rows='15' cols='50' class="form-control">
       <?php
   foreach($read as $name){
     $name=str_replace("<br>","\n",$name);
@@ -93,7 +114,7 @@ function readExcel($filename){
 
 ?>
 </div>
-<input type="submit" name="editar" value="Editar File" class="btn btn-primary w-100 mt-3">
+<input type="submit" name="editar" value="Editar File" class="btn btn-primary w-100 mb-3">
 </form>
 
   <?php
@@ -110,7 +131,7 @@ if(isset($_POST["editar"])){
     //Verificar o Conteudo por caracteres invalidos
     if(strpos($conteudo,'<')!==false || strpos($conteudo,'>')!==false || strpos($conteudo,';')!==false){
       echo '<script>
-      var text="O conteúdo contem caractéres inválidos!";
+      var text="O conteúdo contém caracteres inválidos! (< > ; SPACE)";
       setAlert(text,1);
       </script>';
       $continuar=1;
@@ -126,7 +147,7 @@ if(isset($_POST["editar"])){
     if(@$continuar!==1){
   if(strpos($newtitle,'<')!==false || strpos($newtitle,'>')!==false || strpos($newtitle,';')!==false || strpos($newtitle," ")!==false){
     echo '<script>
-    var text="O título contém caracteres inválidos(< > ; SPACE)!";
+    var text="O título contém caracteres inválidos! (< > ; SPACE)";
     setAlert(text,1);
     </script>';
   }else{
@@ -135,19 +156,13 @@ if(isset($_POST["editar"])){
     //Adicionar extensao de novo ao file
     if(strpos($filename,".txt")!==false){
         rename($file,$finaltitle.".txt");
-        echo '<input type="hidden" value="0" id="edit">
-              <script>
-                var text="Ficheiro editado com sucesso!";
-              setAlertEditWindow(text);
-              </script>';
-        header('Location:index.php?page=6&nam='.$newtitle.'.txt');
+
+        $edit="Success";
+        $encrypt= new Encryption;
+        $encrypted=$encrypt->encryptURL($edit);
+        header('Location:index.php?page=6&nam='.$newtitle.'.txt&edit='.$encrypted.'');
 
     }else{
-      echo '<input type="hidden" value="0" id="edit">
-            <script>
-              var text="Erro ao carregar o ficheiro!";
-            setAlertEditWindow(text);
-            </script>';
 
       header('Location:index.php?page=6&nam='.$newtitle.'.txt');
 

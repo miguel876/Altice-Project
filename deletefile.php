@@ -3,7 +3,6 @@
 $dirfile="Files/";
 $dirimg="Images/";
 
-$file="";
 
 //Nome e Formato do Ficheiro
 $filestxt=glob($dirfile."*.txt");
@@ -16,13 +15,22 @@ $filepng=glob($dirimg."*.png");
   //Delete File
 function deleteFile($filename){
   $file=$filename;
-  unlink($file);
+  if(unlink($file)){
+    $edit="Success";
+  }else{
+    $edit="Error";
+  }
 
-  header('Location:index.php?page=2');
+
+  $encrypt= new Encryption;
+  $encrypted=$encrypt->encryptURL($edit);
+
+  header('Location:index.php?page=2&delete='.$encrypted.'');
 
 }
 
 function selectFiles($filestxt, $filexlsx, $filexls, $filexml){
+
 echo '<form method="post"><select name="files" id="framework" class="form-control">';
 foreach($filestxt as $allfiles){
   echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
@@ -41,6 +49,28 @@ foreach($filejpg as $allfiles){
 }
 foreach($filepng as $allfiles){
     echo "<option value=".$allfiles.">".basename($allfiles)."</option>";
+}
+}
+
+//Alerts
+$alerthash=@$_GET["delete"];
+$edit="Success";
+
+include 'Classes/Encryption.php';
+$encrypt= new Encryption;
+$confirmencrypt=$encrypt->decryptURL($edit,$alerthash);
+if(!empty($alerthash)){
+if($confirmencrypt===0){
+  echo '<script>
+    var text="File apagado com sucesso!";
+    setAlert(text,0);
+    </script>';
+
+}else if($confirmencrypt===1){
+  echo '<script>
+  var text="Erro ao apagar o ficheiro!";
+  setAlert(text,1);
+  </script>';
 }
 }
 ?>

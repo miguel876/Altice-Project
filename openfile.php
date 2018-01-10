@@ -33,7 +33,7 @@ function readExcel($filename){
   $lastRow=$sheet->getHighestRow();
   //Obter a ultima Coluna do ficheiro Excel
   $lastCol=$sheet->getHighestColumn();
-  echo '<div style="overflow: auto; height:500px">';
+  echo '<div style="overflow: auto; height:500px;margin-bottom:3px;">';
   echo "<table class='table table-bordered' style='text-align:center;'>";
   echo "<tr><td></td>";
   for($cc='A';$cc<=$lastCol;$cc++){
@@ -71,7 +71,7 @@ $filejpg=glob($dirimg."*.jpg");
 $filepng=glob($dirimg."*.png");
 
 ?>
-  <div class="row" style="margin-top:3%">
+  <div class="row" style="margin-top:3%;margin-bottom:3%;">
     <div class="col-2">
     </div>
     <div class="col-8">
@@ -81,7 +81,7 @@ $filepng=glob($dirimg."*.png");
 <?php
 
 selectedFiles($filestxt, $filexlsx, $filexml, $filejpg, $filepng);
-echo '</select></td><td><input type="submit" name="open" value="Abrir File" class="btn btn-primary w-100 mt-3"></form></td></tr>';
+echo '</select></td><td><input type="submit" name="open" value="Abrir File" class="btn btn-primary w-100 mt-3 mb-3"></form></td></tr>';
 
 
 if(isset($_POST["open"])){
@@ -118,7 +118,10 @@ if(isset($_POST["open"])){
       echo "<img src=".$file.">";
   }
   else{
-    echo 'Erro ao ler ficheiro!';
+    echo '<script>
+    var text="Erro ao abrir o ficheiro!";
+    setAlert(text,1);
+    </script>';
   }
 
 

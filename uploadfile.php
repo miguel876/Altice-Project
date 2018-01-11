@@ -2,10 +2,6 @@
 
  ?>
 
-<div class="row" style="text-align:center;margin-top:3%">
-    <div class="col-3">
-    </div>
-    <div class="col-6">
 <form method="post" enctype="multipart/form-data">
 <input type="file" name="file" >
 <input type="submit" value="Upload" name="upload" class="btn btn-primary w-50 mt-2">
@@ -19,7 +15,7 @@ if(isset($_POST['upload'])){
   $file_size=$file['size'];
   $file_error=$file['error'];
   $file_location="C:/xampp/htdocs/phpfiles/Altice-Project/Files";
-  
+
   //Lista de files
   $dirfile="Files/";
 
@@ -104,5 +100,3 @@ if($file_name===basename($allfiles)){
 }
 }
  ?>
-</div>
-</div>

@@ -3,7 +3,6 @@
 $dirfile="Files/";
 $dirimg="Images/";
 
-
 //Nome e Formato do Ficheiro
 $filestxt=glob($dirfile."*.txt");
 $filexlsx=glob($dirfile."*.xlsx");
@@ -14,13 +13,13 @@ $filepng=glob($dirimg."*.png");
 
   //Delete File
 function deleteFile($filename){
+    header('Location:index.php?page=2');
   $file=$filename;
   if(unlink($file)){
     $edit="Success";
   }else{
     $edit="Error";
   }
-
 
   $encrypt= new Encryption;
   $encrypted=$encrypt->encryptURL($edit);
@@ -65,7 +64,6 @@ if($confirmencrypt===0){
     var text="File apagado com sucesso!";
     setAlert(text,0);
     </script>';
-
 }else if($confirmencrypt===1){
   echo '<script>
   var text="Erro ao apagar o ficheiro!";
@@ -74,28 +72,27 @@ if($confirmencrypt===0){
 }
 }
 ?>
-
-  <div class="row" style="text-align:center;margin-top:3%">
-    <div class="col-2">
-    </div>
-    <div class="col-8">
       <div id="hidden1" style="display:block;">
 
 <?php
 $file=@$_POST["files"];
 selectFiles($filestxt, $filexlsx, $filexls, $filexml);
 echo '</select><form method="post"><input type="submit" name="apagar" value="Apagar File" class="btn btn-primary w-100 mt-3">';
-
  ?>
 
 </div>
 
 <div id="hidden2" style="display:none;">
-  <div class="card bg-light mb-3">
+  <div class="card bg-light mb-3" style="text-align:center;">
 <div class="card-header">Apagar Ficheiro</div>
 <div class="card-body">
+  <?php
+if(!empty($file)){
+   ?>
   <h5 class="card-title">Apagar o ficheiro <?php echo basename($file) ?>?</h5>
-
+  <?php
+    }
+   ?>
   <input type="submit" name="delete" value="Apagar" class="btn btn-primary">
   <input type="submit" name="cancelar" value="Cancelar" class="btn btn-secondary">
 </form>
@@ -118,5 +115,3 @@ deleteFile($file);
 }
 
  ?>
-</div>
-</div>

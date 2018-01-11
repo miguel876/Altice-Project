@@ -51,7 +51,15 @@ if(empty($filename)){
   var text="Já existe um ficheiro com o mesmo nome!";
   setAlert(text,1);
   </script>';
-}else{
+
+}else if(strpos($filename,"/")!==false || strpos($filename,"<")!==false || strpos($filename,">")!==false || strpos($filename,";")!==false || strpos($filename,"(")!==false || strpos($filename,")")!==false || strpos($filename," ")!==false ){
+  //Verificar se existe algum caracter no nome do ficheiro
+  echo '<script>
+  var text="O conteúdo contém caracteres inválidos!";
+  setAlert(text,1);
+  </script>';
+}
+else{
   fopen('Files/'.$filename.'.txt','w');
 
 echo '<script>
@@ -63,10 +71,7 @@ echo '<script>
 }
 ?>
 
-<div class="row" style="text-align:center;margin-top:3%">
-    <div class="col-2">
-    </div>
-    <div class="col-8">
+
 
 <form method="post">
   <div class="form-group">
@@ -81,5 +86,3 @@ if(isset($_POST["createfile"])){
     createFile($filename);
 }
   ?>
-</div>
-</div>

@@ -6,6 +6,7 @@ function setAlert(text, type){
   var textAlert=text;
   var typeAlert=type;
   alert.style.display="block";
+  alert.style.display="all 0.5s";
   alertText.innerHTML=textAlert;
 
 /*Tipo 0 Sucesso

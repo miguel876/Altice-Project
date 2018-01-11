@@ -26,11 +26,6 @@ foreach($filexml as $allfiles){
 }
 ?>
 
-  <div class="row" style="text-align:center;margin-top:3%">
-    <div class="col-2">
-    </div>
-    <div class="col-8">
-
 
 <?php
 echo '<form method="post"><select name="files" class="form-control">';
@@ -44,5 +39,3 @@ if(isset($_POST["open"])){
 }
 
  ?>
-</div>
-</div>

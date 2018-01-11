@@ -57,12 +57,6 @@ if($confirmencrypt===0){
 }
  ?>
 
-<div class="row" style="text-align:center;margin-top:3%;height:200px;">
-    <div class="col-2">
-    </div>
-    <div class="col-8" style="height:200px;">
-
-
 <form method="post">
 
 <?php
@@ -90,7 +84,7 @@ if($confirmencrypt===0){
 
   //Conteudo
   ?>
-<div style="overflow: auto; height:400px;">
+<div style="overflow: auto; height:500px;margin-bottom:3px;">
   <?php
   if(strpos($file,'.txt')!==false){
   $read=file($file);
@@ -131,7 +125,7 @@ if(isset($_POST["editar"])){
     //Verificar o Conteudo por caracteres invalidos
     if(strpos($conteudo,'<')!==false || strpos($conteudo,'>')!==false || strpos($conteudo,';')!==false){
       echo '<script>
-      var text="O conteúdo contém caracteres inválidos! (< > ; SPACE)";
+      var text="O conteúdo contém caracteres inválidos!";
       setAlert(text,1);
       </script>';
       $continuar=1;
@@ -188,7 +182,3 @@ if(isset($_POST["editar"])){
 }
 
 ?>
-</div>
-<div class="col-2">
-</div>
-</div>

@@ -71,10 +71,9 @@ $filejpg=glob($dirimg."*.jpg");
 $filepng=glob($dirimg."*.png");
 
 ?>
-  <div class="row" style="margin-top:3%;margin-bottom:3%;">
-    <div class="col-2">
-    </div>
-    <div class="col-8">
+
+
+
 <form method="post">
 <select name="files" id="framework" class="form-control">
 
@@ -128,5 +127,3 @@ if(isset($_POST["open"])){
 
 }
  ?>
-</div>
-</div>

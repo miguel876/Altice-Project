@@ -1,17 +1,26 @@
 <html>
-<div class="row mt-3">
-  <div class="col-1">
-  </div>
-  <div class="col-10">
-<div class="btn-group" style="width:100%;height:100%;">
-<a href="index.php?page=1" style="width:50%;height:100%;">Criar File</a>
-<a href="index.php?page=2" style="width:50%;height:100%;">Delete File</a>
-<a href="index.php?page=3" style="width:50%;height:100%;">Abrir File</a>
-<a href="index.php?page=4" style="width:50%;height:100%;">Editar File</a>
-<a href="index.php?page=5" style="width:50%;height:100%;">Upload File</a>
+
+  <div class="col-2">
+
+    <ul class="nav flex-column" style="background-image:url(SystemImages/buttonbgnormal.png);background-size:cover;width:100%;height:100%;" >
+      <li class="nav-item btnbar" >
+        <a href="index.php?page=1">Criar File</a>
+      </li>
+      <li class="nav-item btnbar" >
+      <a href="index.php?page=2">Delete File</a>
+      </li>
+      <li class="nav-item btnbar">
+      <a href="index.php?page=3">Abrir File</a>
+      </li>
+      <li class="nav-item btnbar">
+      <a href="index.php?page=4">Editar File</a>
+      </li>
+      <li class="nav-item btnbar">
+    <a href="index.php?page=5">Upload File</a>
+      </li>
+    </ul>
 
 </div>
-</div>
-</div>
+
 
 </html>

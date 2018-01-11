@@ -20,12 +20,13 @@
   </div>
   <div class="col-5">
     <div class="hidden" id="alert">
-      <div class="alert alert-warning alert-dismissible fade show" id="alertDiv" style="margin-top:1%;height:50px;background-color:#FF5450;color:white;" role="alert">
-    <button type="button" class="close" data-dismiss="alert" style="padding-bottom:1%;" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-    </div>
+          <div class="alert alert-warning alert-dismissible fade show" id="alertDiv" style="margin-top:1%;height:50px;background-color:#FF5450;color:white;" role="alert">
+        <p id="alertText">sdfsdfsdfdss</p>
+        <button type="button" class="close" data-dismiss="alert" style="padding-bottom:1%;" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        </div>
   </div>
 </div>
 <?php

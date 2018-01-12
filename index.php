@@ -20,14 +20,14 @@
         <a href="index.php"><img src="SystemImages/altice.png" widht="27px" height="27px" style="margin-top:5px;"></a>
         <div class="text-logo">Altice</div>
           <div class="vertical-line"></div>
-          <div class="img_top" style="text-align:right;width:87%;"><a href="https://github.com/miguel876/Altice-Project" ><img src="SystemImages/github.png" height="30px" width="30px"></a></div>
+          <div class="img_top" style="text-align:right;width:87%;"><a href="https://github.com/miguel876/Altice-Project" ><img src="SystemImages/github.png" height="20px" width="20px"></a></div>
 
       </nav>
 
     <div class="hidden" id="alert">
-          <div class="alert alert-warning alert-dismissible fade show" id="alertDiv" style="margin-top:1%;height:50px;background-color:#FF5450;color:white;position:absolute;opacity:0.8;" role="alert">
+          <div class="alert alert-warning alert-dismissible fade show" id="alertDiv" style="margin-top:1%;height:50px;background-color:#FF5450;color:white;position:absolute;opacity:0.8;border:none;" role="alert">
         <p id="alertText"></p>
-        <button type="button" class="close mb-1" data-dismiss="alert" style="padding-bottom:1%;" aria-label="Close">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -37,11 +37,11 @@
 
 </div>
 </header>
-<div class="row" style="height:600px;">
+<div class="row" style="height:600px;width:100%;">
 <?php
 include 'header.php';
 ?>
-<div class="col mt-3">
+<div class="col-10" style="background-color:#ECEDE7; box-shadow: 2px 2px 5px 0px #D5D6D1;">
   <?php
   include 'main.php';
   ?>

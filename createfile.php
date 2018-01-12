@@ -72,14 +72,20 @@ echo '<script>
 ?>
 
 
-
+<div class="row mt-3">
+  <div class="col-2">
+  </div>
+  <div class="col">
 <form method="post">
   <div class="form-group">
     <input type="text" name="filetit" placeholder="Nome do File" class="form-control">
   </div>
 <input type="submit" name="createfile" value="Criar File" class="btn btn-primary w-100">
 </form>
-
+</div>
+<div class="col-2">
+</div>
+</div>
 <?php
 if(isset($_POST["createfile"])){
   $filename=$_POST["filetit"];

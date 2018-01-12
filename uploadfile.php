@@ -1,12 +1,16 @@
 <?php
 
  ?>
-
+ <div class="row  mt-3">
+<div class="col-3">
+</div>
+<div class="col">
 <form method="post" enctype="multipart/form-data">
-<input type="file" name="file" >
+<input type="file" name="file" class="form-control-file">
 <input type="submit" value="Upload" name="upload" class="btn btn-primary w-50 mt-2">
 </form>
-
+</div>
+</div>
 <?php
 if(isset($_POST['upload'])){
   $file=$_FILES['file'];
@@ -64,7 +68,6 @@ if($file_name===basename($allfiles)){
       </script>';
 
   }else{
-
   //Tipo de ficheiro
   $file_ext=explode('.',$file_name);
   $file_ext=strtolower(end($file_ext));

@@ -15,7 +15,7 @@ function readExcel($filename){
   //Obter a ultima Coluna do ficheiro Excel
   $lastCol=$sheet->getHighestColumn();
 
-  echo "<table class='table table-bordered' style='text-align:center;'>";
+  echo "<table class='table table-bordered' style='text-align:center; background-color:white'>";
   echo "<tr><td></td>";
   for($cc='A';$cc<=$lastCol;$cc++){
     echo "<td>".$cc."</td>";
@@ -25,7 +25,7 @@ function readExcel($filename){
     echo "<tr><td>".$r."</td>";
     for($c='A'; $c<=$lastCol;$c++){
 
-      echo "<td><input type='text' name='conteudo' value='".$sheet->getCell($c.$r)->getValue()."'></td>";
+      echo "<td><input type='text' value='".$sheet->getCell($c.$r)->getValue()."'></td>";
 
     }
     echo "<tr>";
@@ -56,7 +56,10 @@ if($confirmencrypt===0){
 }
 }
  ?>
-
+<div class="row mt-3">
+  <div class="col-2">
+  </div>
+  <div class="col-8">
 <form method="post">
 
 <?php
@@ -84,7 +87,7 @@ if($confirmencrypt===0){
 
   //Conteudo
   ?>
-<div style="overflow: auto; height:500px;margin-bottom:3px;">
+<div style="overflow: auto; height:450px;">
   <?php
   if(strpos($file,'.txt')!==false){
   $read=file($file);
@@ -108,7 +111,7 @@ if($confirmencrypt===0){
 
 ?>
 </div>
-<input type="submit" name="editar" value="Editar File" class="btn btn-primary w-100 mb-3">
+<input type="submit" name="editar" value="Editar File" class="btn btn-primary w-100 mt-3">
 </form>
 
   <?php
@@ -182,3 +185,7 @@ if(isset($_POST["editar"])){
 }
 
 ?>
+</div>
+<div class="col-2">
+</div>
+</div>

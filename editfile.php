@@ -26,7 +26,10 @@ foreach($filexml as $allfiles){
 }
 ?>
 
-
+<div class="row mt-3">
+  <div class="col-2">
+  </div>
+  <div class="col">
 <?php
 echo '<form method="post"><select name="files" class="form-control">';
 selectFiles($filestxt, $filexlsx, $filexls, $filexml);
@@ -39,3 +42,7 @@ if(isset($_POST["open"])){
 }
 
  ?>
+</div>
+<div class="col-2">
+</div>
+</div>

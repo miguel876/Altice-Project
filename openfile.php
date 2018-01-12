@@ -33,7 +33,7 @@ function readExcel($filename){
   $lastRow=$sheet->getHighestRow();
   //Obter a ultima Coluna do ficheiro Excel
   $lastCol=$sheet->getHighestColumn();
-  echo '<div style="overflow: auto; height:500px;margin-bottom:3px;">';
+
   echo "<table class='table table-bordered' style='text-align:center;'>";
   echo "<tr><td></td>";
   for($cc='A';$cc<=$lastCol;$cc++){
@@ -73,22 +73,26 @@ $filepng=glob($dirimg."*.png");
 ?>
 
 
-
+<div class="row mt-3">
+  <div class="col-2">
+  </div>
+  <div class="col-8">
 <form method="post">
 <select name="files" id="framework" class="form-control">
 
 <?php
 
 selectedFiles($filestxt, $filexlsx, $filexml, $filejpg, $filepng);
-echo '</select></td><td><input type="submit" name="open" value="Abrir File" class="btn btn-primary w-100 mt-3 mb-3"></form></td></tr>';
+echo '</select><input type="submit" name="open" value="Abrir File" class="btn btn-primary w-100 mt-3 mb-3"></form>';
 
 
 if(isset($_POST["open"])){
-
+  echo '<div style="overflow: auto; height:400px;margin-bottom:3px;background-color:white;">';
   $file=$_POST["files"];
 
   if(strpos($file,'.txt')!==false){
     //Ler ficheiro Text
+
     $read=file($file);
     readText($read);
 
@@ -123,7 +127,11 @@ if(isset($_POST["open"])){
     </script>';
   }
 
-
+  echo '</div>';
 
 }
  ?>
+</div>
+<div class="col-2">
+</div>
+</div>

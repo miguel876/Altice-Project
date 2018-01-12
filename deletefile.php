@@ -13,7 +13,7 @@ $filepng=glob($dirimg."*.png");
 
   //Delete File
 function deleteFile($filename){
-    header('Location:index.php?page=2');
+
   $file=$filename;
   if(unlink($file)){
     $edit="Success";
@@ -23,8 +23,8 @@ function deleteFile($filename){
 
   $encrypt= new Encryption;
   $encrypted=$encrypt->encryptURL($edit);
+  echo '<meta htp-equiv="index.php?page=2&delete='.$encrypted.'">';
 
-  header('Location:index.php?page=2&delete='.$encrypted.'');
 
 }
 
@@ -72,6 +72,10 @@ if($confirmencrypt===0){
 }
 }
 ?>
+<div class="row mt-3">
+  <div class="col-2">
+  </div>
+  <div class="col">
       <div id="hidden1" style="display:block;">
 
 <?php
@@ -110,8 +114,13 @@ if($is){
 }
 
 if(isset($_POST["delete"])){
+
 deleteFile($file);
 
 }
 
  ?>
+</div>
+<div class="col-2">
+</div>
+</div>
